@@ -2,8 +2,14 @@ package main
 
 import (
     "html/template"
-    "net/http"
+    "log"
     "os"
+
+    "github.com/gin-gonic/gin"
+    swaggerFiles "github.com/swaggo/files"
+    ginSwagger "github.com/swaggo/gin-swagger"
+
+    "news/docs"
 )
 
 
@@ -11,13 +17,28 @@ var tpl = template.Must(template.ParseFiles("index.html"))
 
 
 func main() {
+    docs.SwaggerInfo.Title = "News Demo API"
+    docs.SwaggerInfo.Description = "API для новостного приложения"
+    docs.SwaggerInfo.Version = "1.0"
+    docs.SwaggerInfo.Host = "localhost:3000"
+    docs.SwaggerInfo.BasePath = "/"
+
     port := os.Getenv("PORT")
     if port == "" {
         port = "3000"
     }
 
-    mux := http.NewServeMux()
+    r := gin.Default()
 
-    mux.HandleFunc("/", indexHandler)
-    http.ListenAndServe(":"+port, mux)
+    r.GET("/", func(c *gin.Context) {
+        if err := tpl.Execute(c.Writer, nil); err != nil {
+            log.Printf("Template error: %v", err)
+        }
+    })
+
+    r.GET("/swagger/*any",
+        ginSwagger.WrapHandler(swaggerFiles.Handler))
+
+    log.Printf("Server started on :%s", port)
+    log.Fatal(r.Run(":" + port))
 }
