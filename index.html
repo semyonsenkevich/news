@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News Demo</title>
+</head>
+<body>
+    <main>
+        <h1>Latest news</h1>
+
+        {{range .Articles}}
+            <article>
+                <h2>
+                    <a href="{{.URL}}">{{.Title}}</a>
+                </h2>
+
+                <p>{{.Description}}</p>
+                <small>{{.Source.Name}}</small>
+            </article>
+        {{else}}
+            <p>No news available.</p>
+        {{end}}
+    </main>
+</body>
+</html>

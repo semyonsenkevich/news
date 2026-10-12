@@ -1,0 +1,33 @@
+
+{
+  "status": "ok",
+  "totalResults": 2,
+  "articles": [
+    {
+      "source": {
+        "id": null,
+        "name": "Tech News"
+      },
+      "author": "John Doe",
+      "title": "Go continues to grow",
+      "description": "A short description of the news.",
+      "url": "https://example.com/go-news",
+      "urlToImage": "",
+      "publishedAt": "2026-10-11T10:00:00Z",
+      "content": "Full news content."
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Developer Daily"
+      },
+      "author": "Jane Doe",
+      "title": "New developments in software",
+      "description": "What's happening in software development.",
+      "url": "https://example.com/software-news",
+      "urlToImage": "",
+      "publishedAt": "2026-10-10T15:30:00Z",
+      "content": "More news content."
+    }
+  ]
+}
